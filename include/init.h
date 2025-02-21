@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp.h                                             :+:      :+:    :+:   */
+/*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwasong <hwasong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 20:14:34 by hwasong           #+#    #+#             */
-/*   Updated: 2025/02/20 20:14:52 by hwasong          ###   ########.fr       */
+/*   Created: 2025/02/21 16:39:53 by hwasong           #+#    #+#             */
+/*   Updated: 2025/02/21 16:39:54 by hwasong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVP_H
-# define ENVP_H
+#ifndef INIT_H
+# define INIT_H
 
-# include "minishell.h"
-
+void	init_shell(t_shell *shell, char **envp);
 #endif

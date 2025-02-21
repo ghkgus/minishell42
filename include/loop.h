@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   loop.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwasong <hwasong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 20:13:27 by hwasong           #+#    #+#             */
-/*   Updated: 2025/02/20 20:14:21 by hwasong          ###   ########.fr       */
+/*   Created: 2025/02/21 15:43:29 by hwasong           #+#    #+#             */
+/*   Updated: 2025/02/21 15:43:59 by hwasong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef LOOP_H
+# define LOOP_H
 
-# include "struct.h"
-# include "loop.h"
-# include "init.h"
-# include "parser.h"
-# include "executor.h"
+# include <readline/readline.h>
 
-# include <stdio.h>
+void	minishell_loop(t_shell *shell);
+char	*prompt_read(void);
 
 #endif

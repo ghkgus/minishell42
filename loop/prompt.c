@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp.c                                             :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwasong <hwasong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 20:05:59 by hwasong           #+#    #+#             */
-/*   Updated: 2025/02/20 20:06:01 by hwasong          ###   ########.fr       */
+/*   Created: 2025/02/21 14:54:05 by hwasong           #+#    #+#             */
+/*   Updated: 2025/02/21 14:54:06 by hwasong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	init_env(t_shell *shell, char **envp)
+char *prompt_read(void)
 {
-	shell -> envp = copy_envp(envp);
-	shell -> process_list = NULL;
-}
+	char	*input;
 
-char    **copy_envp(char **envp)
-{
-	int		i;
-	int		count;
-	char	**new_envp;
-
-	i = 0;
-	count = 0;
-	while (envp[count])
-		count++;
-	new_envp = malloc(sizeof(char *) * (count +1));
-	if (!new_envp)
-		return NULL;
-	while (envp[i])
+	input = readline("minishell$ ");
+	if (!input)
 	{
-		new_envp[i] = strdup(envp[i]);
-		i++;
+		exit_msg();
+		return NULL;
 	}
-	new_envp[i] = NULL;
 
-	return new_envp;
+	add_history(input);
+	return input;
 }

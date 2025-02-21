@@ -27,17 +27,17 @@ typedef struct s_process
 }	t_process;
 
 typedef struct s_process_list	
-{
-	int	count;
-	t_process	*head;
-	t_process	*tail;
+{ // 실행할 프로세스들을 관리하는 구조체
+	int	count; // 실행할 프로세스 개수
+	t_process	*head; // 첫 번째 프로세스
+	t_process	*tail; // 마지막 프로세스
 }	t_process_list;
 
 
 typedef struct s_shell
-{
-	char	**envp;
-	t_process_list	*process_list;
+{ // 환경변수와 실행할 프로세스 리스트 저장하는 역할
+	char	**envp; // 환경 변수 목록
+	t_process_list	*process_list; // 현재 실행할 프로세스 리스트
 }	t_shell;
 
 #endif

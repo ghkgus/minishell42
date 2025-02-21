@@ -21,8 +21,7 @@ int	main(int ac, char **av, char **envp)
 		show_error_msg(ac, av);
 		return (0);
 	}
-	init_env(&shell, envp);
+	init_shell(&shell, envp);
 	minishell_loop(&shell);
 	free_shell(&shell);
-
 }
