@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwasong <hwasong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 20:13:27 by hwasong           #+#    #+#             */
-/*   Updated: 2025/02/20 20:14:21 by hwasong          ###   ########.fr       */
+/*   Created: 2025/02/21 17:57:42 by hwasong           #+#    #+#             */
+/*   Updated: 2025/02/21 17:57:44 by hwasong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
 
-# include "struct.h"
-# include "loop.h"
-# include "init.h"
-# include "parser.h"
-# include "executor.h"
-
-# include <stdio.h>
+void	execute_commands(t_shell *shell, t_process_list *process_list);
 
 #endif

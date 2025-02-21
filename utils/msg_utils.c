@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   msg_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwasong <hwasong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 20:13:27 by hwasong           #+#    #+#             */
-/*   Updated: 2025/02/20 20:14:21 by hwasong          ###   ########.fr       */
+/*   Created: 2025/02/21 16:21:43 by hwasong           #+#    #+#             */
+/*   Updated: 2025/02/21 16:21:45 by hwasong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../include/minishell.h"
 
-# include "struct.h"
-# include "loop.h"
-# include "init.h"
-# include "parser.h"
-# include "executor.h"
+void	show_error_msg(ac, av)
+{
+	(void) ac;
+	(void) av;
+	printf("다시 입력"); // 굳이 해야하나..?
+}
 
-# include <stdio.h>
-
-#endif
+void	exit_msg()
+{
+	printf("exit\n");
+}

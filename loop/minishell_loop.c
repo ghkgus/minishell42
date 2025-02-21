@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwasong <hwasong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 20:13:27 by hwasong           #+#    #+#             */
-/*   Updated: 2025/02/20 20:14:21 by hwasong          ###   ########.fr       */
+/*   Created: 2025/02/21 14:53:58 by hwasong           #+#    #+#             */
+/*   Updated: 2025/02/21 14:53:59 by hwasong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../include/minishell.h"
 
-# include "struct.h"
-# include "loop.h"
-# include "init.h"
-# include "parser.h"
-# include "executor.h"
+void	minishell_loop(t_shell *shell)
+{
+	char			*input;
+	t_process_list	*process_list;
 
-# include <stdio.h>
-
-#endif
+	while (1)
+	{
+		// 시그널 설정
+		input = prompt_read(); // 사용자 입력 받기
+		if (!input)
+			break;
+		
+		process_list = get_parsing_info(shell, input);
+		execute_commands(shell, process_list);
+		free(input);
+	}
+}
