@@ -1,8 +1,9 @@
 # minishell42
 42Projects_minishell
 
-# 디렉토리 구조
+# 📁 디렉토리 구조
 
+```bash
 minishell/
 │── src/
 │   ├── main.c
@@ -26,3 +27,4 @@ minishell/
 │   ├── parser.h
 │   ├── executor.h
 │── Makefile
+```
