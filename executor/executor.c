@@ -14,5 +14,17 @@
 
 void	execute_commands(t_shell *shell, t_process_list *process_list)
 {
-
+	if (!process_list || !process_list -> head)
+		return;
+	
+	if (process_list -> count == 1)
+	{
+		t_process *process = process_list -> head;
+		if (is_builtin(process -> cmd_name))
+			execute_builtin(process, shell);
+		else
+			excute_external(process, shell -> envp);
+	}
+	else
+		exeucute_pipeline(process_list, shell -> envp);
 }
