@@ -14,12 +14,16 @@
 
 void	execute_commands(t_shell *shell, t_process_list *process_list)
 {
+	t_process 	*process;
+	pid_t		*pids;
+
+	pids = malloc(sizeof(pid_t) * process_list -> count);
+	process = process_list -> head;
 	if (!process_list || !process_list -> head)
 		return;
 	
 	if (process_list -> count == 1)
 	{
-		t_process *process = process_list -> head;
 		if (is_builtin(process -> cmd_name))
 			execute_builtin(process, shell);
 		else
