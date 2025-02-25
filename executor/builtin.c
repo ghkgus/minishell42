@@ -10,4 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/minishell.h"
 
+int	is_builtin(char *cmd_name)
+{
+	if (!cmd_name)
+		return (0);
+	
+}

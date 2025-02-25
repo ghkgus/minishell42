@@ -14,5 +14,7 @@
 # define EXECUTOR_H
 
 void	execute_commands(t_shell *shell, t_process_list *process_list);
-
+void	execute_single_process(t_process *process, t_shell *shell);
+void	execute_multi_process(t_process_list *process_list, \
+t_shell *shell, pid_t *pids);
 #endif
