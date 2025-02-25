@@ -14,21 +14,37 @@
 
 void	execute_commands(t_shell *shell, t_process_list *process_list)
 {
-	t_process 	*process;
+	t_process	*process;
 	pid_t		*pids;
 
-	pids = malloc(sizeof(pid_t) * process_list -> count);
-	process = process_list -> head;
 	if (!process_list || !process_list -> head)
-		return;
-	
+		return ;
+	pids = malloc(sizeof(pid_t) * process_list -> count);
+	if (!pids)
+		return ;
+	process = process_list -> head;
 	if (process_list -> count == 1)
-	{
-		if (is_builtin(process -> cmd_name))
-			execute_builtin(process, shell);
-		else
-			excute_external(process, shell -> envp);
-	}
+		execute_single_process(process, shell);
 	else
-		exeucute_pipeline(process_list, shell -> envp);
+		execute_multi_process(process_list, shell, pids);
+	free(pids);
+}
+
+void	execute_single_process(t_process *process, t_shell *shell)
+{
+	if (is_builtin(process -> cmd_name))
+		execute_builtin(process, shell);
+	else
+		excute_external(process, shell -> envp);
+}
+
+void	execute_multi_process(t_process_list *process_list, \
+t_shell *shell, pid_t *pids)
+{
+	t_process	*process;
+	int			i;
+	int			pipe_fd[2];
+
+	process = process_list -> head;
+	i = 0;
 }
