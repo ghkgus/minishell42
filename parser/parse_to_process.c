@@ -6,7 +6,7 @@
 /*   By: yikim2 <yikim2@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:25:39 by yikim2            #+#    #+#             */
-/*   Updated: 2025/03/12 00:27:59 by yikim2           ###   ########.fr       */
+/*   Updated: 2025/03/12 00:42:45 by yikim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ void parse_to_process(m_list *t_list, t_process_list *process_list, t_shell *she
         }
         else if (current_list->content.type == M_ENV)
         {
+            if (current_process != NULL) {
+                current_process->av = realloc(current_process->av, sizeof(char *) * (args_count + 2));
+                current_process->av[args_count++] = ft_strdup(current_list->content.str);
+                current_process->av[args_count] = NULL;
+            }
             if (current_process == NULL) {
                 current_process = (t_process *)malloc(sizeof(t_process));
                 current_process->cmd_name = NULL;
