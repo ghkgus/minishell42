@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_util2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yikim2 <yikim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yikim2 <yikim2@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:06:56 by yikim2            #+#    #+#             */
-/*   Updated: 2025/02/24 11:37:10 by yikim2           ###   ########.fr       */
+/*   Updated: 2025/03/12 00:29:03 by yikim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,14 @@ void	*ft_memcpy(void *dest, const void *src, size_t num)
 		i++;
 	}
 	return (((void *)dest));
+}
+
+int ft_isalnum(int c)
+{
+    if ((c >= 'A' && c <= 'Z') || 
+        (c >= 'a' && c <= 'z') || 
+        (c >= '0' && c <= '9')) {
+        return 1;
+    }
+    return 0;
 }

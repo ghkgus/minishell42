@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yikim2 <yikim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yikim2 <yikim2@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/03 18:22:57 by yikim2            #+#    #+#             */
-/*   Updated: 2025/02/24 14:07:56 by yikim2           ###   ########.fr       */
+/*   Created: 2025/03/12 00:27:12 by yikim2            #+#    #+#             */
+/*   Updated: 2025/03/12 00:27:12 by yikim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 typedef enum {
     M_WORD,
+    M_ENV,
     M_PIPE,
     REDIR_IN,
     REDIR_OUT,
@@ -63,8 +64,17 @@ typedef struct s_process_list
 
 //isalnum, realloc 함수 구현 더블쿼트일때 환경변수 처리(export로 유동적이여서)
 
+typedef struct s_shell
+{ // 환경변수와 실행할 프로세스 리스트 저장하는 역할
+	char	**envp; // 환경 변수 목록
+	t_process_list	*process_list; // 현재 실행할 프로세스 리스트
+}	t_shell;
+
+
 void	sigint_handler(int sig);
 void	set_signal();
+void	heredoc_sigint_handler(int sig);
+void	heredoc_set_signal();
 
 int		_sep(char c, char sep);
 int		word(char *str, char sep);
@@ -78,6 +88,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t num);
 void	*ft_realloc(void *ptr, size_t newsize);
+int     ft_isalnum(int c);
 
 int		is_char(char c, char d);
 int		is_quote(char c, char d);
@@ -88,7 +99,7 @@ void	parse_to_token(char* line, m_list **t_list);
 int		handle_backslash(char *line, int *i);
 void	add_token(m_list **head, int type, char *str);
 
-void	parse_to_process(m_list *t_list, t_process_list *process_list);
+void	parse_to_process(m_list *t_list, t_process_list *process_list, t_shell *shell);
 void	process_to_process_list(t_process_list *head, t_process *new_process);
 int		open_file_for_redirection(char *filename, int type);
 int     here_doc(char *delimiter);
@@ -96,6 +107,8 @@ int     here_doc(char *delimiter);
 char    *get_envp(char *str);
 char    *find_envp_key(char *str);
 char    *heredoc_get_envp(char *str);
+
+t_process_list *get_parsing_info(char *input);
 
 #endif
 

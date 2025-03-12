@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_to_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yikim2 <yikim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yikim2 <yikim2@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:02:30 by yikim2            #+#    #+#             */
-/*   Updated: 2025/02/24 12:49:38 by yikim2           ###   ########.fr       */
+/*   Updated: 2025/03/12 00:28:38 by yikim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void parse_to_token(char* line, m_list **t_list)
         }
 
         if (is_quote(line[i], prev_char)) {
-            printf("1 line[i] : %c\n", line[i]);
+            //printf("1 line[i] : %c\n", line[i]);
             char quote_type = line[i];
             i++;
 
@@ -92,13 +92,20 @@ void parse_to_token(char* line, m_list **t_list)
                 if(quote_type == '\"' && line[i] == '$'){
                     //printf("1\n");
                     char *env_str = get_envp(&line[i]);
-                    strcpy(&buffer[j], env_str);
-                    j += ft_strlen(env_str);
-                    free(env_str);
+                    if (env_str) {
+                        if (j > 0) {
+                            buffer[j] = '\0';
+                            add_token(t_list, M_WORD, buffer);
+                            j = 0;
+                        }
+                        add_token(t_list, M_ENV, env_str);
+                        free(env_str);
+                    }
+                    
                     i++;
-                    printf("line[i] : %c\n", line[i]);
-                    while (line[i] && (isalnum(line[i]) || line[i] == '_')) i++;
-                    printf("index i %d\n", i);
+                    //printf("line[i] : %c\n", line[i]);
+                    while (line[i] && (ft_isalnum(line[i]) || line[i] == '_')) i++;
+                    //printf("index i %d\n", i);
                     continue;
                 }
                 //printf("3\n");
@@ -108,7 +115,7 @@ void parse_to_token(char* line, m_list **t_list)
             if (line[i] == quote_type)
                 i++;
 
-            if(is_space(line[i]) || line[i] == '\0'){
+            if(j > 0 && (is_space(line[i]) || line[i] == '\0')){
                 buffer[j] = '\0';
                 j = 0;
                 printf("add : %s\n", buffer);
@@ -122,13 +129,25 @@ void parse_to_token(char* line, m_list **t_list)
             if (is_quote(line[i], '\0')) {
                 break;
             }
-            if(line[i] == '$'){
+            if(line[i] == '$')
+            {
+                if(line[i + 1] == '?')
+                {
+                    strcpy(&buffer[j++], "0");
+                    i += 2;
+                    break;
+                }
                 char *env_str = get_envp(&line[i]);
-                strcpy(&buffer[j], env_str);
-                j += ft_strlen(env_str);
+                if (j > 0) {
+                    buffer[j] = '\0';
+                    add_token(t_list, M_WORD, buffer);
+                    j = 0;
+                }
+                add_token(t_list, M_ENV, env_str);
                 free(env_str);
+                
                 i++;
-                while (line[i] && (isalnum(line[i]) || line[i] == '_')) i++;
+                while (line[i] && (ft_isalnum(line[i]) || line[i] == '_')) i++;
                 continue;
             }
             if (handle_backslash(line, &i)) {
@@ -139,7 +158,7 @@ void parse_to_token(char* line, m_list **t_list)
             }
             i++;
         }
-        if (is_space(line[i]) || line[i] == '\0')
+        if (j > 0 && (is_space(line[i]) || line[i] == '\0'))
         {
             buffer[j] = '\0';
             j = 0;
@@ -153,6 +172,7 @@ void parse_to_token(char* line, m_list **t_list)
         printf("type: %d, str: %s\n", current->content.type, current->content.str);
         current = current->next;
     }
+    // 토큰화했을 경우 타입과 스트링 프린트
 
     // current = *t_list;
     // while (current) {
