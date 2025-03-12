@@ -108,7 +108,7 @@ char    *get_envp(char *str);
 char    *find_envp_key(char *str);
 char    *heredoc_get_envp(char *str);
 
-t_process_list *get_parsing_info(char *input);
+void    get_parsing_info(t_shell *shell ,char *input);
 
 #endif
 
