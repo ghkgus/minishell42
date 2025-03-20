@@ -18,7 +18,16 @@
 # include "init.h"
 # include "parser.h"
 # include "executor.h"
+# include "utils.h"
+# include "libft.h"
 
+# include <signal.h>
 # include <stdio.h>
+# include <fcntl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <ctype.h>
 
 #endif

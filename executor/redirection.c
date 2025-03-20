@@ -10,4 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/minishell.h"
+
+void	setup_redirection(t_process *process)
+{
+	if (process -> in != STDIN_FILENO)
+	{
+		dup2(process -> in, STDIN_FILENO);
+	}
+	if (process -> out != STDOUT_FILENO)
+	{
+		dup2(process -> out, STDOUT_FILENO);
+	}
+}
 

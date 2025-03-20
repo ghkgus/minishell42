@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   clear_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwasong <hwasong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 14:54:05 by hwasong           #+#    #+#             */
-/*   Updated: 2025/02/21 14:54:06 by hwasong          ###   ########.fr       */
+/*   Created: 2025/03/20 20:18:39 by hwasong           #+#    #+#             */
+/*   Updated: 2025/03/20 20:18:40 by hwasong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char *prompt_read(void)
+void free_shell(t_shell *shell)
 {
-	char	*input;
+	clear_envp_list(shell -> envp);
+}
 
-	input = readline("minishell$ ");
-	if (!input)
+void free_process(t_process_list *process_list, char *input)
+{
+	t_process	*process;
+	t_process	*tmp;
+
+	process = process_list -> head;
+	while (process)
 	{
-		exit_msg();
-		return NULL;
+		tmp = process -> next;
+		free(process -> av);
+		free(process);
+		process = tmp;
 	}
-	add_history(input);
-	return input;
+	free(process_list);
+	free(input);
 }

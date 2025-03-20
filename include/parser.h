@@ -44,32 +44,6 @@ typedef struct m_list{
     struct m_list	*next;
 } m_list;
 
-typedef struct s_process
-{
-    char    *cmd_name; // 프로그램 이름 (예 : ls, echo, cat ...)
-    char    **av; // 뒤에 붙는 인자들 (예 : -l, -n, -a ... ; 여러개 붙을 수 있으니까)
-    int     in; // 입력 파일 디스크립터 - (표준 입력, 리다이렉션 되면 파일디스크립터 값)
-    int     out; // 출력 파일 디스크립터 - (표준 출력, 리다이렉션 되면 fd값)
-    int     is_redirected; // 리다이렉션 유무 확인
-    char    **envp; // 환경변수
-    struct s_process *next; // 파이프 연결되어 있는 다음
-} t_process;
-
-typedef struct s_process_list
-{
-	int			count;
-	t_process	*head;
-	t_process	*tail;
-}	t_process_list;
-
-//isalnum, realloc 함수 구현 더블쿼트일때 환경변수 처리(export로 유동적이여서)
-
-typedef struct s_shell
-{ // 환경변수와 실행할 프로세스 리스트 저장하는 역할
-	char	**envp; // 환경 변수 목록
-	t_process_list	*process_list; // 현재 실행할 프로세스 리스트
-}	t_shell;
-
 
 void	sigint_handler(int sig);
 void	set_signal();

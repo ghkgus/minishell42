@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwasong <hwasong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 14:54:05 by hwasong           #+#    #+#             */
-/*   Updated: 2025/02/21 14:54:06 by hwasong          ###   ########.fr       */
+/*   Created: 2025/03/20 20:10:34 by hwasong           #+#    #+#             */
+/*   Updated: 2025/03/20 20:10:35 by hwasong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char *prompt_read(void)
+int	cd(int argc, char **p_argv, t_envp *el)
 {
-	char	*input;
-
-	input = readline("minishell$ ");
-	if (!input)
-	{
-		exit_msg();
-		return NULL;
-	}
-	add_history(input);
-	return input;
+	char	*path;
 }

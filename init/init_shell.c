@@ -14,29 +14,32 @@
 
 void	init_shell(t_shell *shell, char **envp)
 {
-	shell -> envp = copy_envp(envp);
+	shell -> envp = init_envp(envp);
 	shell -> process_list = NULL;
 }
 
-char    **copy_envp(char **envp)
+t_envp_list	*init_envp(char **envp)
 {
-	int		i;
-	int		count;
-	char	**new_envp;
+	int			i;
+	t_envp_list	*copy_envp_list;
+	t_envp		*envp_node;
 
 	i = 0;
-	count = 0;
-	while (envp[count])
-		count++;
-	new_envp = malloc(sizeof(char *) * (count +1));
-	if (!new_envp)
-		return NULL;
+	copy_envp_list = (t_envp_list *)malloc(sizeof(t_envp_list));
+	if (!copy_envp_list)
+		return (0);
+	copy_envp_list -> head = NULL;
+	copy_envp_list -> tail = NULL;
 	while (envp[i])
 	{
-		new_envp[i] = strdup(envp[i]);
+		envp_node = create_envp_node(envp[i]);
+		if (!envp_node)
+		{
+			clear_envp_list(copy_envp_list);
+			return NULL;
+		}
+		add_node_last(copy_envp_list, envp_node);
 		i++;
 	}
-	new_envp[i] = NULL;
-
-	return new_envp;
+	return (copy_envp_list);
 }

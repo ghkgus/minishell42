@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   restore_io.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwasong <hwasong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 14:54:05 by hwasong           #+#    #+#             */
-/*   Updated: 2025/02/21 14:54:06 by hwasong          ###   ########.fr       */
+/*   Created: 2025/03/20 15:57:17 by hwasong           #+#    #+#             */
+/*   Updated: 2025/03/20 15:57:18 by hwasong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char *prompt_read(void)
+void	save_original(int *original_in, int *original_out)
 {
-	char	*input;
-
-	input = readline("minishell$ ");
-	if (!input)
-	{
-		exit_msg();
-		return NULL;
-	}
-	add_history(input);
-	return input;
+	*original_in = dup(STDIN_FILENO);
+	*original_out = dup(STDOUT_FILENO);
 }
+
+void	restore_original(int original_in, int original_out)
+{
+	dup2(original_in, STDIN_FILENO);
+	dup2(original_out, STDOUT_FILENO);
+	close(original_in);
+	close(original_out);
+}
+

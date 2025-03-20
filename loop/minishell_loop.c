@@ -12,20 +12,16 @@
 
 #include "../include/minishell.h"
 
-void	minishell_loop(t_shell *shell)
+void	minishell_loop(t_shell *shell, char **envp)
 {
-	char			*input;
-	t_process_list	*process_list;
+	char	*input;
 
+	set_signal();
 	while (1)
 	{
-		// 시그널 설정
-		input = prompt_read(); // 사용자 입력 받기
-		if (!input)
-			break;
-		
-		process_list = get_parsing_info(shell, input);
-		execute_commands(shell, process_list);
-		free(input);
+		input = prompt_read();
+		get_parsing_info(shell, input); // 여기에 shell -> process_list 의 정보를 담아 주면 됨
+		execute_commands(shell, envp);
+		free_process(shell -> process_list, input);
 	}
 }

@@ -23,3 +23,8 @@ void	exit_msg()
 {
 	printf("exit\n");
 }
+
+void	show_fork_error_msg()
+{
+	printf("fork 실패");
+}

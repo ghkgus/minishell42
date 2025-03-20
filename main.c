@@ -22,6 +22,6 @@ int	main(int ac, char **av, char **envp)
 		return (0);
 	}
 	init_shell(&shell, envp);
-	minishell_loop(&shell);
+	minishell_loop(&shell, envp);
 	free_shell(&shell);
 }

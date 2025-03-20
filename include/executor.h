@@ -13,8 +13,19 @@
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
-void	execute_commands(t_shell *shell, t_process_list *process_list);
-void	execute_single_process(t_process *process, t_shell *shell);
-void	execute_multi_process(t_process_list *process_list, \
-t_shell *shell, pid_t *pids);
+void	execute_commands(t_shell *shell, char **envp);
+void	execute_single_builtin(t_shell *shell);
+void	execute_multi_process(t_shell *shell, pid_t *pids, char **envp);
+
+
+void	save_original(int *original_in, int *original_out);
+void	restore_original(int original_in, int original_out);
+
+int		is_builtin(char *cmd_name);
+void	execute_builtin(t_process *process, char *envp, int single_cmd);
+void	execute_piped_builtin(t_process *process, pid_t pids, char **envp);
+
+void 	execute_child_process(t_process *process, char **envp, pid_t pids, t_shell *shell);
+
+void	setup_redirection(t_process *process);
 #endif

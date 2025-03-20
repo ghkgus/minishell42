@@ -15,7 +15,7 @@
 
 # include <readline/readline.h>
 
-void	minishell_loop(t_shell *shell);
+void	minishell_loop(t_shell *shell, char **envp);
 char	*prompt_read(void);
-
+void	clear_process(t_process *process_list, char *input);
 #endif
